@@ -1,0 +1,8 @@
+# Name: MgrEmail
+# Get Manager Action to Mgr Email of logged in user
+kind: Variable
+name: MgrEmail
+scope: User
+isExternalInitializationAllowed: false
+initializationTimeoutInMilliseconds: 0
+aIVisibility: Hidden

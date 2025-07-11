@@ -1,0 +1,142 @@
+# Name: Create and Submit Time-Off File to Insperity
+# This tool can handle queries like these: create time-off file, submit time-off request, how to create a time-off file, send time-off request to Insperity, time-off submission process
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    triggerQueries:
+      - create time-off file
+      - submit time-off request
+      - how to create a time-off file
+      - send time-off request to Insperity
+      - time-off submission process
+      - generate time-off document for Insperity
+      - file a leave request with Insperity
+      - Insperity time-off form creation
+      - submit leave application to Insperity
+
+  actions:
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_A52KK3
+      input: {}
+      output:
+        binding:
+          mgrdisplayname: Global.MGRDisplayName
+          userempid: Global.UserEMPID
+          usermgremail: Global.UserMgrEmail
+
+      flowId: 2f433f34-9456-f011-877a-7c1e521420f2
+
+    - kind: SendActivity
+      id: SendActivity_L6GZaE
+      activity: Hi {System.User.DisplayName} can help with that. Let’s gather the details for your time-off submission. Please answer the following prompts.
+
+    - kind: Question
+      id: question_uvtQur
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Global.Date
+      prompt: "What date is the time off scheduled for? (Format: YYYY-MM-DD)"
+      entity: StringPrebuiltEntity
+
+    - kind: Question
+      id: Question_Y8FKad
+      variable: Global.HoursRequested
+      prompt: How many hours are being taken off?
+      entity: NumberPrebuiltEntity
+
+    - kind: Question
+      id: Question_48wk4g
+      variable: Global.TimeOffReason
+      prompt: What is the reason for the time off?
+      entity: StringPrebuiltEntity
+
+    - kind: SendActivity
+      id: SendActivity_t0wU9V
+      activity: |-
+        Great — I’ve collected the following details:
+        - Employee Name: {System.User.DisplayName}
+        - EmployeeID: {Global.UserEMPID}
+        - Date:{Global.Date}
+        - Mgr name:{Global.MGRDisplayName}
+        - Mgr Email:{Global.UserMgrEmail}
+        - Hours: {Global.HoursRequested}
+        - Reason: {Global.TimeOffReason}
+
+        Now I’ll create a CSV file and begin the upload process.
+
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_Kc8HxH
+      input:
+        binding:
+          date: =Global.Date
+          number: =Global.HoursRequested
+          text_1: =System.User.DisplayName
+          text_2: =Global.TimeOffReason
+          text_3: =Global.MGRDisplayName
+          text_4: =Global.UserEMPID
+          text_5: =System.User.Email
+
+      output:
+        binding:
+          approvalstatus: Global.approvalStatus
+
+      flowId: e1860db4-a456-f011-877a-7c1e521420f2
+
+    - kind: SendActivity
+      id: sendActivity_n9STdU
+      activity: |-
+        Your time off request has been recorded.
+        Please contact your manager if you have any questions.
+
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_pRGfA6
+      displayName: Action_SPListUpdate
+      input:
+        binding:
+          number: =Global.HoursRequested
+          text: =Global.Date
+          text_1: =System.User.DisplayName
+          text_2: =Global.approvalStatus
+          text_3: =Global.TimeOffReason
+          text_4: =Global.MGRDisplayName
+          text_6: =Global.UserEMPID
+
+      output: {}
+      flowId: 22425f4b-d74b-f011-8779-6045bdda80df
+
+    - kind: ConditionGroup
+      id: conditionGroup_uHz4vi
+      conditions:
+        - id: conditionItem_jkm9y5
+          condition: =Global.approvalStatus = "Approved"
+          displayName: Condition Approved
+          actions:
+            - kind: SendActivity
+              id: sendActivity_E8qFhY
+              activity: |-
+                Hi {System.User.DisplayName},
+
+                Your time-off request has been recorded and uploaded to Insperity.
+                The HR List has been updated.
+
+                Request Status: **{Global.approvalStatus}**
+
+                Your calendar has been updated with an all-day event, and a reminder has been sent to your manager.
+
+      elseActions:
+        - kind: SendActivity
+          id: sendActivity_YdGdil
+          activity: |+
+            Hi {System.User.DisplayName},
+
+            Your time-off request has been recorded and uploaded to Insperity.
+            The HR List has been updated.
+
+            Request Status: **{Global.approvalStatus}**
+            ****
+
+inputType: {}
+outputType: {}

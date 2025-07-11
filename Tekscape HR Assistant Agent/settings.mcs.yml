@@ -1,0 +1,25 @@
+﻿displayName: Tekscape HR Assistant Agent
+schemaName: cr25e_insperityHrAssistantAgent
+accessControlPolicy: ChatbotReaders
+authenticationMode: Integrated
+authenticationTrigger: Always
+configuration:
+  settings:
+    GenerativeActionsEnabled: true
+
+  gPTSettings:
+    defaultSchemaName: cr25e_insperityHrAssistantAgent.gpt.default
+
+  aISettings:
+    useModelKnowledge: true
+    isFileAnalysisEnabled: true
+    isSemanticSearchEnabled: true
+    optInUseLatestModels: false
+
+  recognizer:
+    kind: GenerativeAIRecognizer
+
+authenticationConfiguration: {}
+publishedOn: 2025-07-10T14:04:55.0000000Z
+template: default-2.1.0
+language: 1033

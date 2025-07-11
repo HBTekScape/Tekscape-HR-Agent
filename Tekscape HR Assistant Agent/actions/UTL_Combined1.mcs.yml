@@ -1,0 +1,14 @@
+# Name: UTL_Combined1
+kind: TaskDialog
+outputs:
+  - propertyName: usermgremail
+
+  - propertyName: userempid
+
+  - propertyName: mgrdisplayname
+
+action:
+  kind: InvokeFlowTaskAction
+  flowId: 2f433f34-9456-f011-877a-7c1e521420f2
+
+outputMode: All
