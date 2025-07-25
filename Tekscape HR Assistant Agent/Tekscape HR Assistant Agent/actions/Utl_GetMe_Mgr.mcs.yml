@@ -1,0 +1,21 @@
+# Name: Utl_GetMe_Mgr
+kind: TaskDialog
+inputs:
+  - kind: ManualTaskInput
+    propertyName: text
+    value: =Global.useremail
+
+outputs:
+  - propertyName: useremail
+
+  - propertyName: userdisplayname
+
+  - propertyName: usermgrname
+
+  - propertyName: usermgremail
+
+action:
+  kind: InvokeFlowTaskAction
+  flowId: 7522c9c3-7f4b-f011-8779-6045bdda80df
+
+outputMode: All

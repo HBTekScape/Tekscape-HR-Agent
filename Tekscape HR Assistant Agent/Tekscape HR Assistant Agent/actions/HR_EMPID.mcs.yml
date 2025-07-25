@@ -1,0 +1,15 @@
+# Name: HR_EMPID
+kind: TaskDialog
+inputs:
+  - kind: ManualTaskInput
+    propertyName: text
+    value: =Global.useremail
+
+outputs:
+  - propertyName: emp_id
+
+action:
+  kind: InvokeFlowTaskAction
+  flowId: 98548887-454c-f011-8779-6045bdda80df
+
+outputMode: All

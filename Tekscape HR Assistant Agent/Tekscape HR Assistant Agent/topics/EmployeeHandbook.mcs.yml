@@ -1,0 +1,41 @@
+# Name: Employee Handbook
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    triggerQueries:
+      - employee handbook
+      - company policies
+      - workplace guidelines
+      - staff manual
+      - employee rules
+      - HR handbook
+      - office regulations
+      - team member guide
+      - employment policies
+
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: xLV4gr
+      userInput: =System.LastMessage.Text
+      moderationLevel: Low
+      additionalInstructions: |
+        Based on the TekScape Employee Handbook (2024), provide a clear and concise response to the following employee inquiry: {System.LastMessage.Text}. Use only content found in the handbook to answer...
+      fileSearchDataSource:
+        searchFilesMode:
+          kind: SearchSpecificFiles
+          files:
+            - cr25e_insperityHrAssistantAgent.file.InsperityTekscapeEmployeeHandbook20242.pdf_FvP
+
+      knowledgeSources:
+        kind: SearchSpecificKnowledgeSources
+
+    - kind: Question
+      id: Question_ijm0IB
+      variable: Topic.UserQuery
+      prompt: What information are you looking for?
+      entity: StringPrebuiltEntity
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,7 @@
+# Name: UTL_SPListUpdate
+kind: TaskDialog
+action:
+  kind: InvokeFlowTaskAction
+  flowId: 22425f4b-d74b-f011-8779-6045bdda80df
+
+outputMode: All

@@ -1,0 +1,7 @@
+# Name: CurrentTime
+kind: Variable
+name: CurrentTime
+scope: User
+isExternalInitializationAllowed: true
+initializationTimeoutInMilliseconds: 0
+aIVisibility: Hidden

@@ -1,0 +1,31 @@
+# Name: HR_MGR_Approval
+kind: TaskDialog
+inputs:
+  - kind: ManualTaskInput
+    propertyName: text_1
+    value: =System.User.Email
+
+  - kind: ManualTaskInput
+    propertyName: text
+    value: =System.User.DisplayName
+
+  - kind: ManualTaskInput
+    propertyName: text_2
+    value: =Global.TimeOffReason
+
+  - kind: ManualTaskInput
+    propertyName: text_3
+    value: =Global.Date
+
+  - kind: ManualTaskInput
+    propertyName: number
+    value: =Global.HoursRequested
+
+outputs:
+  - propertyName: approvalstatus
+
+action:
+  kind: InvokeFlowTaskAction
+  flowId: 5b571e5e-ce4b-f011-8779-6045bdda80df
+
+outputMode: All

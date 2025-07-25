@@ -1,0 +1,11 @@
+# Name: AdaptiveCard
+kind: TaskDialog
+modelDescription: AdaptiveCard to Approve or Reject PTO request from employees to their reporting managers
+outputs:
+  - propertyName: approvalstatus
+
+action:
+  kind: InvokeFlowTaskAction
+  flowId: e1860db4-a456-f011-877a-7c1e521420f2
+
+outputMode: All
